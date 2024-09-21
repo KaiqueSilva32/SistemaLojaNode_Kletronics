@@ -1,0 +1,61 @@
+<%- include ('partials/navbar.ejs') %>
+<%- include ('partials/header.ejs') %>
+<link rel="stylesheet" href="/css/styles.css">
+
+<div id="Banner" class="carousel slide" data-bs-ride="carousel">
+    <div id="Indicadores" class="carousel-indicators">
+        <button type="button" data-bs-target="Banner" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="Banner" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="Banner" data-bs-slide-to="2"></button>
+    </div>
+    
+    <div id="Imagens" class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="imgs/Banner_Index.webp" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+            <img src="imgs/Banner_Index2.webp" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+            <img src="imgs/Banner_Index3.webp" class="d-block w-100">
+        </div>
+    </div>
+        <button type="button" class="carousel-control-prev" data-bs-target="#Banner" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button type="button" class="carousel-control-next" data-bs-target="#Banner" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</div>
+
+<h1 style="color: #fff; text-align: center;">Seja Bem Vindo</h1>
+<h5 style="text-align: center; color: #f2f2f2; margin-top: 20px;">A Maior Loja Gamer do País</h5>
+
+<main style="display: flex; ">
+<img src="imgs/PCBranco.png" width="500px" height="500px" style="border-radius: 2%; 
+    margin-top: 30px;
+    margin-left: 15px;
+">
+<img src="imgs/Notebook.png" style="margin-left: 250px; width: 360px; height: 360px; margin-top: 20px;">
+
+<img src="imgs/mt.png" width="350px" height="350px" style="margin-left: 300px; margin-top: 100px;">
+
+
+</div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include ('partials/footer.ejs') %>
+</html>

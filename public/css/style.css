@@ -1,0 +1,23 @@
+.table1 {
+    border: 1px solid #fff;
+    text-align: center;
+    margin-left: 650px;
+    margin-top: 100px;
+    
+}
+
+main {
+    height: 600px;
+    
+}
+
+body {
+    background: linear-gradient(45deg, #1e1e1e, #2b2a2a);
+}
+
+.sobrePrinci {
+    display: flex;
+    color: #fff;
+    margin-top: 500px;
+    margin-right: 500px;
+}
