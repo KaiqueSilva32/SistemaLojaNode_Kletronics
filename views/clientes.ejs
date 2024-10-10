@@ -1,37 +1,68 @@
 <%- include ('partials/navbar.ejs') %>
 <%- include ('partials/header.ejs') %>
+<br><br>
+<div class="container">
+    <div class="card">
+            <div class="card-header">
+                <h1>Cadastrar Cliente</h1>
+            </div>
+    
+        <div class="card-body">
+            <form action="/clientes/new" method="POST">
+                <label>Nome do cliente:</label>
+                <input type="text" name="nome" id="nome" placeholder="Insira o nome do cliente" class="form-control" required >
 
+                <label>CPF:</label>
+                <input type="text" name="cpf" id="cpf" placeholder="Insira o CPF do cliente" class="form-control" required >
 
+                <label>Endereço</label>
+                <input type="text" name="endereco" id="endereco" placeholder="Insira o Endereço do cliente" class="form-control" required >
+                <br>
+                <input type="submit" class="btn btn-success" value="Cadastrar">
+            </form>
+            <hr>
+        </div>
+    </div>
+</div>
+<br><br>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Clientes</h1>
+                </div>
+                <div class="card-body alinhar">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Nome:</th>
+                                <th>CPF:</th>
+                                <th>Endereço:</th>
+                                <th colspan="2">Ações:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% clientes.forEach(cliente=> { %>
+                                <tr >
+                                    <td><img src="imgs/avatar.png" width="30px"></td>
+                                    <td class="row-nome">
+                                        <%= cliente.nome %>
+                                    </td>
+                                    <td class="row-cpf">
+                                        <%= cliente.cpf %>
+                                    </td>
+                                    <td class="row-endereco">
+                                        <%= cliente.endereco %>
+                                    </td>
+                                    <td class="row-edit"><a style="color: orange;" href="/clientes/edit/<%= cliente.id %>">Editar</a></td>
 
-<main>
-<table class="table1" border="1" style="color: #FFF; line-height: 30px; ">
-    <tr> 
-        <th width="200px" style="padding-top: 20px; padding-bottom: 10px;">Nome</th>
-        <th width="200px" style="padding-top: 20px; padding-bottom: 10px;">CPF</th>
-        <th width="200px" style="padding-top: 20px; padding-bottom: 10px;">Endereço</th>
-    </tr>
-    <% clientes.forEach((cli) => { %>
-    <tr>
-        <td><%= cli.nome %></td>
-        <td><%= cli.cpf %></td>
-        <td><%= cli.endereco %></td>
-    </tr>
-      <%  }) %>
-</table>
-
-</main>
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                    <td class="row-delete"><a style="color: red;"  href="/clientes/delete/<%= cliente.id %>" onclick="return confirm('Deseja realmente deletar o cliente <%= cliente.nome %> ?')">Deletar</a></td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
 <%- include ('partials/footer.ejs') %>

@@ -1,20 +1,65 @@
-<%- include ('partials/navbar.ejs') %>
 <%- include ('partials/header.ejs') %>
+<%- include ('partials/navbar.ejs') %>
+<br><br><br>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Cadastrar Produto</h1>
+        </div>
 
-<main>
-    <table class="table1" border="1" style="color: #FFF; line-height: 50px; ">
-        <tr> 
-            <th width="200px" style="padding-top: 20px; padding-bottom: 10px;">Produto</th>
-            <th width="200px" style="padding-top: 20px; padding-bottom: 10px;">Preço</th>
-            <th width="200px" style="padding-top: 20px; padding-bottom: 10px;">Categoria</th>
-        </tr>
-        <% produtos.forEach((prod) => { %>
-        <tr>
-            <td><%= prod.produto %></td>
-            <td><%= prod.preco %></td>
-            <td><%= prod.categoria %></td>
-        </tr>
-          <%  }) %>
-    </table>
-</main>
+        <div class="card-body">
+            <form action="/produtos/new" method="POST">
+                <label>Nome do Produto:</label>
+                <input type="text" name="nome" id="nome" placeholder="Insira o nome do produto" class="form-control" required>
+
+                <label>Preço:</label>
+                <input type="text" name="preco" id="preco" placeholder="Insira o preço do produto" class="form-control" required>
+
+                <label>Categoria:</label>
+                <input type="text" name="categoria" id="categoria" placeholder="Insira a categoria do produto" class="form-control" required>
+                <br>
+                <input type="submit" class="btn btn-success" value="Cadastrar">
+            </form>
+        </div>
+    </div>
+</div>
+<br><br>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Produtos</h1>
+            </div>
+            <div class="card-body alinhar">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nome:</th>
+                            <th>Preço:</th>
+                            <th>Categoria:</th>
+                            <th colspan="2">Ações:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% produtos.forEach(produto => { %>
+                        <tr>
+                            <td><img src="imgs/product.png" width="30px"></td>
+                            
+                            <td class="row-nome"><%= produto.nome %></td>
+                            
+                            <td class="row-valor-ped"><%= produto.preco.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'}) %></td>
+                            
+                            <td class="row-categ"><%= produto.categoria %></td>
+                            
+                            <td class="row-edit"><a style="color: orange;" href="/produtos/edit/<%= produto.id %>">Editar</a></td>
+
+                            <td class="row-delete"><a style="color: red;" href="/produtos/delete/<%= produto.id %>" onclick="return confirm ('Deseja realmente deletar o produto <%= produto.nome %>')">Deletar</a></td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 <%- include ('partials/footer.ejs') %>

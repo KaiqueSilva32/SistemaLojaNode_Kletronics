@@ -1,104 +1,47 @@
-const express = require("express");
+// Importando o Express com ES6 Modules
+import express from "express";
+// Iniciando o Express na variável app
 const app = express();
+// Importando o Sequelize (com os dados da conexão)
+import connection from "./config/sequelize-config.js";
+// Importando os Controllers (onde estão as rotas)
+import ClientesController from "./controllers/ClientesController.js";
+import ProdutosController from "./controllers/ProdutosController.js";
+import PedidosController from "./controllers/PedidosController.js";
 
+// Permite capturar dados vindo de formulários
+app.use(express.urlencoded({extend:false}));
+
+// Realizando a conexão com o banco de dados
+connection
+  .authenticate()
+  .then(() => {
+    console.log("Conexão com o banco de dados feita com sucesso!");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+// Criando o banco de dados se ele não existir
+connection.query(`CREATE DATABASE IF NOT EXISTS Kletronics;`).then(() => {
+  console.log("O banco de dados está criado.");
+}).catch((error) => {
+    console.log(error)
+});
+
+// Define o EJS como Renderizador de páginas
 app.set("view engine", "ejs");
-
+// Define o uso da pasta "public" para uso de arquivos estáticos
 app.use(express.static("public"));
 
-// ROTA PRINCIPAL (INDEX.EJS)
-app.get("/", (req, res) => {
+// Definindo o uso das rotas dos Controllers
+app.use("/", ClientesController);
+app.use("/", ProdutosController);
+app.use("/", PedidosController);
+
+// ROTA PRINCIPAL
+app.get("/", function (req, res) {
   res.render("index");
-});
-
-// ROTA CLIENTES (CLIENTES.EJS)
-app.get("/clientes", (req, res) => {
-  const clientes = [
-    {
-      nome: "Roberto da Silva",
-      cpf: 128563907347,
-      endereco: "Rua das Oliveiras, 150 Jd.São Paulo",
-    },
-    {
-      nome: "Laís Ribeiro",
-      cpf: 11098563785,
-      endereco: "Rua Ribeirópolis, 467 Jd.Blumenau",
-    },
-    {
-      nome: "Thiago Peron",
-      cpf: 38956735146,
-      endereco: "Rua 10 de Outubro, 329 Av.Paulistana"
-    },
-    {
-      nome: "Roberta Sallez",
-      cpf: 24785609362,
-      endereco: "Rua 9 de Março, 240 Jd. Maria das Dores"
-    }
-  ]
-  res.render("clientes", {
-    clientes: clientes,
-  });
-});
-
-// ROTA PRODUTOS (PRODUTOS.EJS)
-app.get("/produtos", (req, res) => {
-  const produtos = [
-    {
-      produto: "PC Gamer AMD Ryzen",
-      preco: 5300,
-      categoria: "Computadores"
-    },
-    {
-      produto: "Notebook Gamer Asus",
-      preco: 7500,
-      categoria: "Computador Portátil"
-    },
-    {
-      produto: "Celular Rog Phone",
-      preco: 2300,
-      categoria: "Smartphones"
-    },
-    {
-      produto: "PC Intel 9700x",
-      preco: 6700,
-      categoria: "Computadores"
-    },
-  ]
-  res.render("produtos", {
-    produtos: produtos 
-  });
-});
-
-// ROTA PEDIDOS (PEDIDOS.EJS)
-app.get("/pedidos", (req, res) => {
-  const pedidos = [
-    {
-      numeroDoPedido: 1,
-      valor: 5300,
-    },
-    {
-      numeroDoPedido: 2,
-      valor: 7500,
-    },
-    {
-      numeroDoPedido: 3,
-      valor: 6700,
-    },
-    {
-      numeroDoPedido: 4,
-      valor:2300,
-    },
-    {
-      numeroDoPedido: 5,
-      valor: 5300,
-    },
-    {
-      numeroDoPedido: 6,
-      valor: 2300
-    }
-  ];
-  res.render("pedidos", {
-    pedidos: pedidos,
-  });
 });
 
 // INICIANDO O SERVER NA PORTA (3000)

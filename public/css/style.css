@@ -1,10 +1,4 @@
-.table1 {
-    border: 1px solid #fff;
-    text-align: center;
-    margin-left: 650px;
-    margin-top: 100px;
-    
-}
+
 
 main {
     height: 600px;
@@ -15,9 +9,53 @@ body {
     background: linear-gradient(45deg, #1e1e1e, #2b2a2a);
 }
 
-.sobrePrinci {
-    display: flex;
-    color: #fff;
-    margin-top: 500px;
-    margin-right: 500px;
+.alinhar {
+    display: flex !important;
+    justify-content: center !important;
+    
+}
+
+.row-edit {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.row-delete {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.row-endereco {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.row-cpf {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.row-nome {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+
+
+.row-numero-ped {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.row-valor-ped {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+
+.row-categ {
+    padding-left: 25px;
+    padding-right: 25px;
 }
