@@ -4,8 +4,10 @@ const router = express.Router();
 import Produto from "../models/Produto.js";
 import connection from "../config/sequelize-config.js";
 
+import Auth from "../middleware/Auth.js"
+
 // ROTA PRODUTOS
-router.get("/produtos", function (req, res) {
+router.get("/produtos", Auth, (req, res) => {
   Produto.findAll().then((produtos) => {
     res.render("produtos", {
       produtos: produtos,

@@ -8,9 +8,35 @@ import connection from "./config/sequelize-config.js";
 import ClientesController from "./controllers/ClientesController.js";
 import ProdutosController from "./controllers/ProdutosController.js";
 import PedidosController from "./controllers/PedidosController.js";
+import UsersController from "./controllers/UsersController.js"
+
+// Importando o gerador de sessões  do express
+import session from "express-session";
+
+// Importando o middleware Auth
+import Auth from "./middleware/Auth.js";
+
+// Importando o express flash
+import flash from "express-flash";
+
+// Configurando o express-session
+app.use(
+  session({
+    secret: "Kletronics",
+    cookie: { maxAge: 3600000 },
+    saveUnitialized: false,
+    resave: false,
+  })
+);
+
+// Configurando as flash messages
+app.use(flash());
 
 // Permite capturar dados vindo de formulários
-app.use(express.urlencoded({extend:false}));
+app.use(express.urlencoded({ extend: false }));
+
+// Permite capturar dados vindo de formulários
+app.use(express.urlencoded({ extend: false }));
 
 // Realizando a conexão com o banco de dados
 connection
@@ -23,11 +49,14 @@ connection
   });
 
 // Criando o banco de dados se ele não existir
-connection.query(`CREATE DATABASE IF NOT EXISTS Kletronics;`).then(() => {
-  console.log("O banco de dados está criado.");
-}).catch((error) => {
-    console.log(error)
-});
+connection
+  .query(`CREATE DATABASE IF NOT EXISTS Kletronics;`)
+  .then(() => {
+    console.log("O banco de dados está criado.");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 // Define o EJS como Renderizador de páginas
 app.set("view engine", "ejs");
@@ -38,10 +67,13 @@ app.use(express.static("public"));
 app.use("/", ClientesController);
 app.use("/", ProdutosController);
 app.use("/", PedidosController);
+app.use("/", UsersController);
 
 // ROTA PRINCIPAL
-app.get("/", function (req, res) {
-  res.render("index");
+app.get("/", Auth, (req, res) => {
+  res.render("index", {
+    messages: req.flash(),
+  });
 });
 
 // INICIANDO O SERVER NA PORTA (3000)

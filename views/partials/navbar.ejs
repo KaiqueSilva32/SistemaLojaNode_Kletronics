@@ -16,7 +16,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #000;">
     <a class="navbar-brand" href="/"><img src="/imgs/Logo.png" 
-    style="margin-left: 400px; 
+    style="margin-left: 600px; 
     margin-top: 20px;
     
     " 
@@ -39,6 +39,17 @@
             <P class="h5 text-light">Pedidos</P></a>
         </li>
       </ul>
+      <span style="margin-left: 400px;">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <% if (typeof loggedOut === "undefined") { %>
+              <a class="nav-link" href="/logout">Fazer logout</a>
+        <%  } else { %>
+          <a class="nav-link" href="/login">Fazer login</a>
+      <% } %>
+          </li>
+        </ul>
+      </span>
     </div>
     <div class="col"></div>
   </nav>
